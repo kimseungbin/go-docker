@@ -14,5 +14,8 @@ RUN go mod download
 # compile
 RUN CGO_ENABLED=0 go build -o /go/bin/app main.go
 
-# run!
-CMD ["/go/bin/app"]
+FROM gcr.io/distroless/base-debian11
+WORKDIR /
+COPY --from=build /go/bin/app /
+USER nonroot:nonroot
+ENTRYPOINT ["/app"]
