@@ -12,7 +12,7 @@ COPY ./src ./
 RUN go mod download
 
 # compile
-RUN go build -o /go/bin/app main.go
+RUN CGO_ENABLED=0 go build -o /go/bin/app main.go
 
 # run!
 CMD ["/go/bin/app"]
