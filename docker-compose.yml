@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  redis:
+    image: redis:7-alpine
+    # exposes container ports to the network which docker-compose creates
+    # cannot be accessed from local user
+    expose: ["6379"]
+  api-server:
+    build: .
+    # binds local and container ports
+    # can be accessed from local user
+    ports: ["8080:8080"]
+    # wait for redis container to be ready
+    depends_on:
+      - redis
