@@ -2,8 +2,7 @@ FROM golang:1.19.2-alpine AS build
 WORKDIR /usr/app/src
 
 # copy necessary module scripts
-COPY go.mod ./
-COPY go.sum ./
+COPY go.mod go.sum ./
 
 # copy source code
 COPY ./src ./
