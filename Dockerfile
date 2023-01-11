@@ -4,11 +4,11 @@ WORKDIR /usr/app/src
 # copy necessary module scripts
 COPY go.mod go.sum ./
 
-# copy source code
-COPY ./src ./
-
 # install dependencies (i.e. modules)
 RUN go mod download
+
+# copy source code
+COPY ./src ./
 
 # compile
 RUN CGO_ENABLED=0 go build -o /go/bin/app main.go
