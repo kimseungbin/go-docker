@@ -13,7 +13,7 @@ COPY ./src ./
 # compile
 RUN CGO_ENABLED=0 go build -o /go/bin/app main.go
 
-FROM gcr.io/distroless/base-debian11
+FROM gcr.io/distroless/base-debian12 AS runtime
 WORKDIR /
 COPY --from=build /go/bin/app /
 USER nonroot:nonroot
