@@ -1,4 +1,4 @@
-module github.com/seungbin0508/go-docker
+module github.com/kimseungbin/go-docker
 
 go 1.23
 
