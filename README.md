@@ -1,7 +1,16 @@
 # Overview
 
-This is an example project to set up a local development environment for api server of Go and Redis using Docker.
-The language and the database are largely irrelevant to the purpose of this project.
+This project demonstrates efficient Docker workflows, focusing on techniques to optimize container images and build
+processes. Key highlights include:
+
+1. Creating Small and Efficient Docker Images:
+    - Use multi-stage builds to minimize image size.
+    - Leverage image and dependency caching to speed up the build and reduce redundancy.
+2. Demonstrating Caching with GitHub Workflows:
+    - Utilize GitHub Actions to automate the build process
+    - Compare the effectiveness of caching by running parallel builds:
+        - One with caching enabled
+        - Another without caching for comparison
 
 ## Specifications
 
