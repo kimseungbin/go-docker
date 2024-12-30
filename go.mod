@@ -1,6 +1,6 @@
 module github.com/seungbin0508/go-docker
 
-go 1.19
+go 1.23
 
 require (
 	github.com/go-redis/redis/v9 v9.0.0-rc.1

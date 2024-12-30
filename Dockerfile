@@ -1,4 +1,4 @@
-FROM golang:1.19.2-alpine AS build
+FROM golang:1.23-alpine AS build
 WORKDIR /usr/app/src
 
 # copy necessary module scripts
