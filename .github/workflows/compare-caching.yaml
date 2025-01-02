@@ -9,6 +9,12 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+      - name: Record Start Time
+        run: echo "start_time=$(date +%s)" >> $GITHUB_ENV
+      - name: Simulate Task
+        run: sleep 5
+      - name: Record End Time
+        run: echo "end_time=$(date +%s)" >> $GITHUB_ENV
 
   recreate-mod-cache:
     name: Use Existing Go Module Cache Without Changes
@@ -152,3 +158,4 @@ jobs:
         run: |
           echo "| Job Name                  | Duration (seconds) |" >> $GITHUB_STEP_SUMMARY
           echo "|---------------------------|--------------------|" >> $GITHUB_STEP_SUMMARY
+          cat /tmp/create-mod-cache_start_time
