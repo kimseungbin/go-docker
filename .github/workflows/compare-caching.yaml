@@ -129,3 +129,27 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+
+  aggregate-results:
+    name: Aggregate Results
+    runs-on: ubuntu-latest
+    needs:
+      - recreate-mod-cache
+      - partial-cache-go-mod-change
+      - no-cache-go-mod
+      - recreate-build-cache
+      - partial-cache-go-build-code-change
+      - partial-cache-go-build-mod-change
+      - partial-cache-go-build-full-change
+      - no-cache-go-build
+      - recreate-docker-layer-caching
+      - partial-cache-layer-mod-change
+      - partial-cache-layer-code-change
+      - partial-cache-layer-full-change
+      - no-cache-layer-full-change
+    steps:
+      - name: Generate Summary Table
+        run: |
+          echo "| Job Name                  | Duration (seconds) |" > summary.md
+          echo "|---------------------------|--------------------|" >> summary.md
+      - name: Print Workflow Summary
