@@ -1,0 +1,123 @@
+name: Compare Cache Efficiency
+run-name: Compare Cache Efficiency for ${{ github.ref_name }} - ${{ github.event.pull_request.title }}
+on: push
+jobs:
+  # Go Mod Cache Jobs
+  create-mod-cache:
+    name: Create Go Module Cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+  recreate-mod-cache:
+    name: Use Existing Go Module Cache Without Changes
+    runs-on: ubuntu-latest
+    needs: create-mod-cache
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+  partial-cache-go-mod:
+    name: Use Go Module Cache with Additional Dependencies
+    runs-on: ubuntu-latest
+    needs: create-mod-cache
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+  no-cache-go-mod:
+    name: No Cache with Additional Go Module Dependencies
+    runs-on: ubuntu-latest
+    # No dependency on create-mod-cache as this uses no cache
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+  # Go Build Cache Jobs
+  create-build-cache:
+    name: Create Go Build Cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+  recreate-build-cache:
+    name: Use Existing Go Build Cache Without Changes
+    runs-on: ubuntu-latest
+    needs: create-build-cache
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+  partial-cache-go-build-code-change:
+    name: Use Go Build Cache with Code Changes
+    runs-on: ubuntu-latest
+    needs: create-build-cache
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+  partial-cache-go-build-mod-change:
+    name: Use Go Build Cache with Dependency Changes
+    runs-on: ubuntu-latest
+    needs: create-build-cache
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+  partial-cache-go-build-full-change:
+    name: Use Go Build Cache with Code and Dependency Changes
+    runs-on: ubuntu-latest
+    needs: create-build-cache
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+  no-cache-go-build:
+    name: No Cache with Code Changes
+    runs-on: ubuntu-latest
+    # No dependency on create-build-cache as this uses no cache
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+  # Docker Layer Caching Jobs
+  create-docker-layer-caching:
+    name: Create Docker Layer Cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+  recreate-docker-layer-caching:
+    name: Use Existing Docker Layer Cache Without Changes
+    runs-on: ubuntu-latest
+    needs: create-docker-layer-caching
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+  partial-cache-layer-mod-change:
+    name: Use Docker Layer Cache with Dependency Changes
+    runs-on: ubuntu-latest
+    needs: create-docker-layer-caching
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+  partial-cache-layer-code-change:
+    name: Use Docker Layer Cache with Code Changes
+    runs-on: ubuntu-latest
+    needs: create-docker-layer-caching
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+  partial-cache-layer-code-full-change:
+    name: Use Docker Layer Cache with Code and Dependency Changes
+    runs-on: ubuntu-latest
+    needs: create-docker-layer-caching
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
