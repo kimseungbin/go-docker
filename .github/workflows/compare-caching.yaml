@@ -29,7 +29,7 @@ jobs:
   no-cache-go-mod:
     name: No Cache with Additional Go Module Dependencies
     runs-on: ubuntu-latest
-    # No dependency on create-mod-cache as this uses no cache
+    needs: create-mod-cache
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -77,7 +77,7 @@ jobs:
   no-cache-go-build:
     name: No Cache with Code Changes
     runs-on: ubuntu-latest
-    # No dependency on create-build-cache as this uses no cache
+    needs: create-build-cache
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
