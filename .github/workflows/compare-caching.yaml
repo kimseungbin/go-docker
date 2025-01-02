@@ -20,7 +20,7 @@ jobs:
         run: |
           end_time=$(date +%s)
           duration=$((end_time - $start_time))
-          echo "duration=$duration" > /tmp/create-mod-cache-duration
+          echo "duration=$duration" >> $GITHUB_OUTPUT
 
   recreate-mod-cache:
     name: Use Existing Go Module Cache Without Changes
@@ -357,8 +357,4 @@ jobs:
 
           echo "| Job Name                  | Duration (seconds) |" >> $GITHUB_STEP_SUMMARY
           echo "|---------------------------|--------------------|" >> $GITHUB_STEP_SUMMARY
-
-          for job in ${jobs[@]}"; do
-            duration=$(cat /tmp/${job}-duration)
-            echo "| $job | $duration |" >> $GITHUB_STEP_SUMMARY
-          done
+          echo "| create-mod-cache          | ${{ needs.create-mod-cache.outputs.duration }} |" >> $GITHUB_STEP_SUMMARY
