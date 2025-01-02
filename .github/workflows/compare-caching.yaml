@@ -146,6 +146,7 @@ jobs:
     name: Aggregate Results
     runs-on: ubuntu-latest
     needs:
+      - create-mod-cache
       - recreate-mod-cache
       - partial-cache-go-mod-change
       - no-cache-go-mod
