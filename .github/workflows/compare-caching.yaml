@@ -18,7 +18,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-  partial-cache-go-mod:
+  partial-cache-go-mod-change:
     name: Use Go Module Cache with Additional Dependencies
     runs-on: ubuntu-latest
     needs: create-mod-cache
