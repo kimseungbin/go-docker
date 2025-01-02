@@ -114,7 +114,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-  partial-cache-layer-code-full-change:
+  partial-cache-layer-full-change:
     name: Use Docker Layer Cache with Code and Dependency Changes
     runs-on: ubuntu-latest
     needs: create-docker-layer-caching
