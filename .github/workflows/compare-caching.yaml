@@ -151,6 +151,16 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+      - name: Record Start Time
+        run: echo "start_time=$(date +%s)" >> $GITHUB_ENV
+      - name: Simulate Task
+        run: sleep 5
+      - name: Get Duration
+        id: get-duration
+        run: |
+          end_time=$(date +%s)
+          duration=$((end_time - $start_time))
+          echo "duration=$duration" >> $GITHUB_OUTPUT
 
   partial-cache-go-build-full-change:
     name: Use Go Build Cache with Code and Dependency Changes
