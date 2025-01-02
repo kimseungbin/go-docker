@@ -6,6 +6,8 @@ jobs:
   create-mod-cache:
     name: Create Go Module Cache
     runs-on: ubuntu-latest
+    outputs:
+      duration: ${{ steps.get-duration.outputs.duration }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -14,10 +16,11 @@ jobs:
       - name: Simulate Task
         run: sleep 5
       - name: Get Duration
+        id: get-duration
         run: |
           end_time=$(date +%s)
           duration=$((end_time - $start_time))
-          echo "duration=$duration" >> $GITHUB_ENV
+          echo "duration=$duration" >> $GITHUB_OUTPUT
 
   recreate-mod-cache:
     name: Use Existing Go Module Cache Without Changes
@@ -161,3 +164,4 @@ jobs:
         run: |
           echo "| Job Name                  | Duration (seconds) |" >> $GITHUB_STEP_SUMMARY
           echo "|---------------------------|--------------------|" >> $GITHUB_STEP_SUMMARY
+          echo "${{ needs.create-mod-cache.outputs.duration }}"
