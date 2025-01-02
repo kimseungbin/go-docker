@@ -152,4 +152,3 @@ jobs:
         run: |
           echo "| Job Name                  | Duration (seconds) |" > summary.md
           echo "|---------------------------|--------------------|" >> summary.md
-      - name: Print Workflow Summary
