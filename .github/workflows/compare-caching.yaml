@@ -337,4 +337,19 @@ jobs:
         run: |
           echo "| Job Name                  | Duration (seconds) |" >> $GITHUB_STEP_SUMMARY
           echo "|---------------------------|--------------------|" >> $GITHUB_STEP_SUMMARY
-          echo "| create-mod-cache          | ${{ needs.create-mod-cache.outputs.duration }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| create-mod-cache              | ${{ needs.create-mod-cache.outputs.duration }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| create-build-cache            | ${{ needs.create-build-cache.outputs.duration }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| create-docker-layer-caching   | ${{ needs.create-docker-layer-caching.outputs.duration }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| recreate-mod-cache            | ${{ needs.recreate-mod-cache.outputs.duration }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| partial-cache-go-mod-change   | ${{ needs.partial-cache-go-mod-change.outputs.duration }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| no-cache-go-mod               | ${{ needs.no-cache-go-mod.outputs.duration }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| recreate-build-cache          | ${{ needs.recreate-build-cache.outputs.duration }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| partial-cache-go-build-code-change | ${{ needs.partial-cache-go-build-code-change.outputs.duration }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| partial-cache-go-build-mod-change | ${{ needs.partial-cache-go-build-mod-change.outputs.duration }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| partial-cache-go-build-full-change | ${{ needs.partial-cache-go-build-full-change.outputs.duration }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| no-cache-go-build             | ${{ needs.no-cache-go-build.outputs.duration }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| recreate-docker-layer-caching | ${{ needs.recreate-docker-layer-caching.outputs.duration }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| partial-cache-layer-mod-change | ${{ needs.partial-cache-layer-mod-change.outputs.duration }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| partial-cache-layer-code-change | ${{ needs.partial-cache-layer-code-change.outputs.duration }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| partial-cache-layer-full-change | ${{ needs.partial-cache-layer-full-change.outputs.duration }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| no-cache-layer-full-change    | ${{ needs.no-cache-layer-full-change.outputs.duration }} |" >> $GITHUB_STEP_SUMMARY
