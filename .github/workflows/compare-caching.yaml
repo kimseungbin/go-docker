@@ -1,5 +1,5 @@
 name: Compare Cache Efficiency
-run-name: Compare Cache Efficiency for ${{ github.ref_name }} - ${{ github.event.pull_request.title }}
+run-name: Compare Cache Efficiency for ${{ github.event.head_commit.message }}
 on: push
 jobs:
   # Go Mod Cache Jobs
