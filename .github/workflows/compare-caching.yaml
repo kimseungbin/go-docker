@@ -20,7 +20,7 @@ jobs:
         run: |
           end_time=$(date +%s)
           duration=$((end_time - $start_time))
-          echo "duration=$duration" >> $GITHUB_OUTPUT
+          echo "duration=$duration" > /tmp/create-mod-cache-duration
 
   recreate-mod-cache:
     name: Use Existing Go Module Cache Without Changes
@@ -335,28 +335,30 @@ jobs:
     steps:
       - name: Generate Summary Table
         run: |
-          jobs=("create-mod-cache"
-                "create-build-cache"
-                "create-docker-layer-caching"
-                "recreate-mod-cache"
-                "partial-cache-go-mod-change"
-                "no-cache-go-mod"
-                "recreate-build-cache"
-                "partial-cache-go-build-code-chagne"
-                "partial-cache-go-build-mod-change"
-                "partial-cache-go-build-full-change"
-                "no-cache-go-build"
-                "recreate-docker-layer-caching"
-                "partial-cache-layer-mod-change"
-                "partial-cache-layer-code-change"
-                "partial-code-layer-full-change"
-                "no-cache-layer-full-change"
-                )
-          
+#          jobs=("create-mod-cache"
+#                "create-build-cache"
+#                "create-docker-layer-caching"
+#                "recreate-mod-cache"
+#                "partial-cache-go-mod-change"
+#                "no-cache-go-mod"
+#                "recreate-build-cache"
+#                "partial-cache-go-build-code-chagne"
+#                "partial-cache-go-build-mod-change"
+#                "partial-cache-go-build-full-change"
+#                "no-cache-go-build"
+#                "recreate-docker-layer-caching"
+#                "partial-cache-layer-mod-change"
+#                "partial-cache-layer-code-change"
+#                "partial-code-layer-full-change"
+#                "no-cache-layer-full-change"
+#                )
+
+          jobs=("create-mod-cache")
+
           echo "| Job Name                  | Duration (seconds) |" >> $GITHUB_STEP_SUMMARY
           echo "|---------------------------|--------------------|" >> $GITHUB_STEP_SUMMARY
 
           for job in ${jobs[@]}"; do
-            duration="${{ needs[$job].outputs.duration }}"
+            duration=$(cat /tmp/${job}-duration)
             echo "| $job | $duration |" >> $GITHUB_STEP_SUMMARY
           done
