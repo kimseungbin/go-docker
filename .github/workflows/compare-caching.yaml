@@ -211,10 +211,14 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
       - name: Record Start Time
         run: echo "start_time=$(date +%s)" >> $GITHUB_ENV
-      - name: Simulate Task
-        run: sleep 5
+      - name: Build
+        uses: docker/build-push-action@v6
+        with:
+          tags: layer-cache:latest
       - name: Get Duration
         id: get-duration
         run: |
