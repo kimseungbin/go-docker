@@ -12,12 +12,38 @@ processes. Key highlights include:
         - One with caching enabled
         - Another without caching for comparison
 
-## Specifications
+# Docker Caching
 
-- Language: Go 1.19.2
-- Database: Redis 7.x
-- Container: Docker and docker-compose
-- Web Framework: [Echo](https://github.com/labstack/echo)
+Caching is a critical feature in Docker that helps improve build performance and efficiency.
+Docker provides multiple types of caching mechanisms, each suited for different use cases:
+
+## Types of Docker Caching
+
+1. Docker Layer Caching
+
+   Docker uses a layer-based architecture where each instruction in the Dockerfile creates a layer.
+   Layers are cached and reused during subsequent builds if they haven't changed.
+   This type of caching helps speed up builds by skipping unchanged layers.
+
+[//]: # (Todo Add Docerfile code example)
+
+2. Docker Cache Mounts
+
+   Docker cache mounts provide a flexible way to optimize builds by specifying a persistent cache location that can be used across builds.
+   Unlike regular Docker layer caching, which depends on an exact match of the instruction and its dependencies, cache mounts allow for cumulative caching. This means even if a layer is rebuilt, **only new or changed data is processed**, while unchanged data is reused from the cache.
+
+Comparison: Regular Layer Caching vs. Cache Mounts
+
+| Aspect       | Layer Caching                                                  | Cache Mounts                                                     |
+|--------------|----------------------------------------------------------------|------------------------------------------------------------------|
+| Scope        | Caches the entire layer based on instruction and dependencies. | Caches specific directories or files persistently.               |
+| Invalidation | Cache invalidates if files or instructions change.             | Cache remains cumulative; only updates new or changed data.      |
+| Use Case     | General caching for Dockerfile instructions.                   | Targeted caching for tools like package managers or build tools. |
+| Example      | `COPY` or `RUN` commands in Dockerfile                         | `--mount=type=cache` in `RUN` commands.                          |
+
+# References
+
+- https://docs.docker.com/build/cache/optimize/
 
 # Install
 
